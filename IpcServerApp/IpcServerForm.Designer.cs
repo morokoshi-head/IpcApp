@@ -31,7 +31,7 @@
             this.NamedPipeLabel = new System.Windows.Forms.Label();
             this.pipeNameTextBox = new System.Windows.Forms.TextBox();
             this.LogTextBox = new System.Windows.Forms.TextBox();
-            this.MessageTextBox = new System.Windows.Forms.TextBox();
+            this.SendMessageTextBox = new System.Windows.Forms.TextBox();
             this.DisconnectButton = new System.Windows.Forms.Button();
             this.ConnectButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,15 +71,15 @@
             this.LogTextBox.Size = new System.Drawing.Size(769, 133);
             this.LogTextBox.TabIndex = 2;
             // 
-            // MessageTextBox
+            // SendMessageTextBox
             // 
-            this.MessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MessageTextBox.Location = new System.Drawing.Point(398, 144);
-            this.MessageTextBox.Multiline = true;
-            this.MessageTextBox.Name = "MessageTextBox";
-            this.MessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MessageTextBox.Size = new System.Drawing.Size(380, 192);
-            this.MessageTextBox.TabIndex = 4;
+            this.SendMessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SendMessageTextBox.Location = new System.Drawing.Point(398, 144);
+            this.SendMessageTextBox.Multiline = true;
+            this.SendMessageTextBox.Name = "SendMessageTextBox";
+            this.SendMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SendMessageTextBox.Size = new System.Drawing.Size(380, 192);
+            this.SendMessageTextBox.TabIndex = 4;
             // 
             // DisconnectButton
             // 
@@ -160,7 +160,7 @@
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.ReceiveMessageTextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.MessageTextBox);
+            this.Controls.Add(this.SendMessageTextBox);
             this.Controls.Add(this.LogTextBox);
             this.Name = "IpcServerForm";
             this.Text = "IpcServerApp";
@@ -176,7 +176,7 @@
         private System.Windows.Forms.Label NamedPipeLabel;
         private System.Windows.Forms.TextBox pipeNameTextBox;
         public System.Windows.Forms.TextBox LogTextBox;
-        public System.Windows.Forms.TextBox MessageTextBox;
+        public System.Windows.Forms.TextBox SendMessageTextBox;
         private System.Windows.Forms.Button DisconnectButton;
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.Label label1;

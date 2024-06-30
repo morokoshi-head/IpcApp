@@ -27,9 +27,9 @@ namespace IpcServerApp
         /// <summary>
         /// メッセージを表示する
         /// </summary>
-        public void DispMessage(string message)
+        public void DispMessage(TextBox textBox, string message)
         {
-            MessageTextBox.Text += (message + "\r\n");
+            textBox.Text += (message + "\r\n");
         }
 
         /// <summary>
@@ -41,13 +41,14 @@ namespace IpcServerApp
 
             server = new IpcServer(message =>
             {
+                // メッセージ受信のコールバック定義
                 if (message == null)
                 {
                     DispLog($"クライアントが切断されました。");
                 }
                 else
                 {
-                    DispMessage(message);
+                    DispMessage(ReceiveMessageTextBox, message);
                 }
             });
 

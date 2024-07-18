@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 
 namespace IpcClientApp
 {
@@ -21,11 +20,19 @@ namespace IpcClientApp
         }
 
         /// <summary>
+        /// メッセージを表示する
+        /// </summary>
+        public void DispMessage(TextBox textBox, string message)
+        {
+            textBox.Text += (message + "\r\n");
+        }
+
+        /// <summary>
         /// 送信ボタンのクリックイベント
         /// </summary>
         private void SendButton_Click(object sender, EventArgs e)
         {
-            if (client.pipe.IsConnected == false)
+            if ((client == null) || (client.pipe.IsConnected == false))
             {
                 return;
             }
@@ -64,13 +71,27 @@ namespace IpcClientApp
             string ipAddress = IpAddressTextBox.Text;
             string pipe = PipeTextBox.Text;
 
-            client = new IpcClient();
+            client = new IpcClient(message =>
+            {
+                // メッセージ受信のコールバック定義
+                if (message == null)
+                {
+                    DispLog($"クライアントが切断されました。");
+                }
+                else
+                {
+                    DispMessage(ReceiveMessageTextBox, message);
+                }
+            });
+
             bool isSuccess = await client.Connect(ipAddress, pipe);
 
             if (isSuccess != false)
             {
                 DispLog($"サーバーに接続しました。");
             }
+
+            await client.Listen();
         }
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IpcServerApp
@@ -60,6 +59,40 @@ namespace IpcServerApp
             }
 
             await server.Listen();
+        }
+
+        /// <summary>
+        /// 送信ボタンのクリックイベント
+        /// </summary>
+        private void SendButton_Click(object sender, EventArgs e)
+        {
+            if ((server == null) || (server.pipe.IsConnected == false))
+            {
+                return;
+            }
+
+            if (server.reader == null)
+            {
+                return;
+            }
+
+            if (server.writer == null)
+            {
+                return;
+            }
+
+            string message = SendMessageTextBox.Text;
+
+            SendMessage(message);
+            SendMessageTextBox.ResetText();
+        }
+
+        /// <summary>
+        /// メッセージを送信する
+        /// </summary>
+        private async void SendMessage(string message)
+        {
+            await server.writer.WriteLineAsync(message);
         }
 
         /// <summary>

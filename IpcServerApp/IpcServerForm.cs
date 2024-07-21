@@ -43,7 +43,7 @@ namespace IpcServerApp
                 // メッセージ受信のコールバック定義
                 if (message == null)
                 {
-                    DispLog($"クライアントが切断されました。");
+                    // Do nothing
                 }
                 else
                 {

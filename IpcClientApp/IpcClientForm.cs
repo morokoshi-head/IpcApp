@@ -76,7 +76,7 @@ namespace IpcClientApp
                 // メッセージ受信のコールバック定義
                 if (message == null)
                 {
-                    DispLog($"クライアントが切断されました。");
+                    // Do nothing
                 }
                 else
                 {
@@ -102,7 +102,7 @@ namespace IpcClientApp
             bool isSuccess = client.Disconnect();
             if (isSuccess != false)
             {
-                DispLog($"サーバーとの接続を切断しました。");
+                DispLog($"サーバーとの通信を切断しました。");
             }
         }
 

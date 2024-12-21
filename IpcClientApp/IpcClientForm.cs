@@ -6,6 +6,8 @@ namespace IpcClientApp
     public partial class IpcClientForm : Form
     {
         public IpcClient client;
+        public string ipAddress;
+        public string pipeName;
         public IpcClientForm()
         {
             InitializeComponent();
@@ -66,10 +68,18 @@ namespace IpcClientApp
         /// </summary>
         private async void ConnectButton_Click(object sender, EventArgs e)
         {
-            DispLog($"サーバに接続します。");
+            if (pipeNameTextBox.Text == null)
+            {
+                return;
+            }
 
-            string ipAddress = IpAddressTextBox.Text;
-            string pipe = PipeTextBox.Text;
+            if (pipeNameTextBox.Text == this.pipeName)
+            {
+                // 同じ名前付きパイプで複数の通信スレッドは作成しない
+                return;
+            }
+
+            DispLog($"サーバに接続します。");
 
             client = new IpcClient(message =>
             {
@@ -84,7 +94,9 @@ namespace IpcClientApp
                 }
             });
 
-            bool isSuccess = await client.Connect(ipAddress, pipe);
+            this.ipAddress = IpAddressTextBox.Text;
+            this.pipeName = pipeNameTextBox.Text;
+            bool isSuccess = await client.Connect(ipAddress, pipeName);
 
             if (isSuccess != false)
             {

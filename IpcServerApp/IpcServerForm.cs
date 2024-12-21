@@ -6,6 +6,7 @@ namespace IpcServerApp
     public partial class IpcServerForm : Form
     {
         public IpcServer server;
+        public string pipeName;
 
         /// <summary>
         /// コンストラクタ
@@ -36,6 +37,17 @@ namespace IpcServerApp
         /// </summary>
         private async void ConnectButton_Click(object sender, EventArgs e)
         {
+            if (pipeNameTextBox.Text == null)
+            {
+                return;
+            }
+
+            if (pipeNameTextBox.Text == this.pipeName)
+            {
+                // 同じ名前付きパイプで複数の通信スレッドは作成しない
+                return;
+            }
+
             DispLog($"クライアントの接続を待機します。");
 
             server = new IpcServer(message =>
@@ -51,8 +63,8 @@ namespace IpcServerApp
                 }
             });
 
-
-            bool isSuccesss = await server.Connect(pipeNameTextBox.Text);
+            this.pipeName = pipeNameTextBox.Text;
+            bool isSuccesss = await server.Connect(this.pipeName);
 
             if (isSuccesss != false)
             {

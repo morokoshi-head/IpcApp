@@ -53,6 +53,7 @@ namespace IpcServerApp
 
 
             bool isSuccesss = await server.Connect(pipeNameTextBox.Text);
+
             if (isSuccesss != false)
             {
                 DispLog($"クライアントが接続されました。");

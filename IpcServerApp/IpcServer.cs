@@ -44,7 +44,7 @@ namespace IpcServerApp
         /// <summary>
         /// 名前付きパイプを切断する
         /// </summary>
-        public void Disconnect()
+        public bool Disconnect()
         {
             try
             {
@@ -65,10 +65,12 @@ namespace IpcServerApp
                     pipe.Close();
                     pipe.Dispose();
                 }
+
+                return true;
             }
             catch (IOException e)
             {
-                // エラー処理
+                return false;
             }
         }
 

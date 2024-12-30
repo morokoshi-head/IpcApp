@@ -50,19 +50,16 @@ namespace IpcServerApp
             {
                 if (writer != null)
                 {
-                    writer.Close();
                     writer.Dispose();
                 }
 
                 if (reader != null)
                 {
-                    reader.Close();
                     reader.Dispose();
                 }
 
                 if (pipe != null)
                 {
-                    pipe.Close();
                     pipe.Dispose();
                 }
 

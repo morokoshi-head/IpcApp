@@ -55,7 +55,7 @@
             // pipeNameTextBox
             // 
             this.pipeNameTextBox.Location = new System.Drawing.Point(82, 44);
-            this.pipeNameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pipeNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pipeNameTextBox.MaxLength = 32;
             this.pipeNameTextBox.Name = "pipeNameTextBox";
             this.pipeNameTextBox.Size = new System.Drawing.Size(114, 19);
@@ -67,7 +67,7 @@
             this.LogTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.LogTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LogTextBox.Location = new System.Drawing.Point(9, 317);
-            this.LogTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LogTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.LogTextBox.Multiline = true;
             this.LogTextBox.Name = "LogTextBox";
             this.LogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -78,7 +78,7 @@
             // 
             this.SendMessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SendMessageTextBox.Location = new System.Drawing.Point(298, 115);
-            this.SendMessageTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SendMessageTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.SendMessageTextBox.Multiline = true;
             this.SendMessageTextBox.Name = "SendMessageTextBox";
             this.SendMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -88,17 +88,18 @@
             // DisconnectButton
             // 
             this.DisconnectButton.Location = new System.Drawing.Point(476, 38);
-            this.DisconnectButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DisconnectButton.Margin = new System.Windows.Forms.Padding(2);
             this.DisconnectButton.Name = "DisconnectButton";
             this.DisconnectButton.Size = new System.Drawing.Size(90, 24);
             this.DisconnectButton.TabIndex = 5;
             this.DisconnectButton.Text = "切断";
             this.DisconnectButton.UseVisualStyleBackColor = true;
+            this.DisconnectButton.Click += new System.EventHandler(this.DisconnectButton_Click);
             // 
             // ConnectButton
             // 
             this.ConnectButton.Location = new System.Drawing.Point(381, 38);
-            this.ConnectButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ConnectButton.Margin = new System.Windows.Forms.Padding(2);
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(90, 24);
             this.ConnectButton.TabIndex = 6;
@@ -120,7 +121,7 @@
             // 
             this.ReceiveMessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ReceiveMessageTextBox.Location = new System.Drawing.Point(9, 115);
-            this.ReceiveMessageTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ReceiveMessageTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.ReceiveMessageTextBox.Multiline = true;
             this.ReceiveMessageTextBox.Name = "ReceiveMessageTextBox";
             this.ReceiveMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -130,7 +131,7 @@
             // SendButton
             // 
             this.SendButton.Location = new System.Drawing.Point(484, 274);
-            this.SendButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SendButton.Margin = new System.Windows.Forms.Padding(2);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(90, 24);
             this.SendButton.TabIndex = 9;
@@ -145,9 +146,9 @@
             this.CommunicationSettingsGroupBox.Controls.Add(this.ConnectButton);
             this.CommunicationSettingsGroupBox.Controls.Add(this.DisconnectButton);
             this.CommunicationSettingsGroupBox.Location = new System.Drawing.Point(9, 10);
-            this.CommunicationSettingsGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CommunicationSettingsGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.CommunicationSettingsGroupBox.Name = "CommunicationSettingsGroupBox";
-            this.CommunicationSettingsGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CommunicationSettingsGroupBox.Padding = new System.Windows.Forms.Padding(2);
             this.CommunicationSettingsGroupBox.Size = new System.Drawing.Size(577, 75);
             this.CommunicationSettingsGroupBox.TabIndex = 18;
             this.CommunicationSettingsGroupBox.TabStop = false;
@@ -175,7 +176,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SendMessageTextBox);
             this.Controls.Add(this.LogTextBox);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "IpcServerForm";
             this.Text = "IpcServerApp";
             this.CommunicationSettingsGroupBox.ResumeLayout(false);

@@ -5,6 +5,7 @@ namespace IpcServerApp
 {
     public partial class IpcServerForm : Form
     {
+        public readonly string appName = "IpcServerApp";
         public IpcServer server;
         public string pipeName;
 
@@ -55,10 +56,13 @@ namespace IpcServerApp
                 // メッセージ受信のコールバック定義
                 if (message == null)
                 {
-                    // Do nothing
+                    // 通信が切断されたとき
+                    this.Text = appName;
+                    this.pipeName = null;
                 }
                 else
                 {
+                    // メッセージを受信したとき
                     DispMessage(ReceiveMessageTextBox, message);
                 }
             });
@@ -68,10 +72,22 @@ namespace IpcServerApp
 
             if (isSuccesss != false)
             {
-                DispLog($"クライアントが接続されました。");
+                this.Text = appName + "（通信中）";
             }
 
             await server.Listen();
+        }
+
+        /// <summary>
+        /// 切断ボタンのクリックイベント
+        /// </summary>
+        private void DisconnectButton_Click(object sender, EventArgs e)
+        {
+            bool isSuccess = server.Disconnect();
+            if (isSuccess != false)
+            {
+                DispLog($"通信を切断しました。");
+            }
         }
 
         /// <summary>
@@ -106,6 +122,7 @@ namespace IpcServerApp
         private async void SendMessage(string message)
         {
             await server.writer.WriteLineAsync(message);
+            await server.writer.FlushAsync();
         }
 
         /// <summary>

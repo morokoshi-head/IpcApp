@@ -1,4 +1,8 @@
-﻿using System;
+﻿using IpcData;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text.Json;
 using System.Windows.Forms;
 
 namespace IpcClientApp
@@ -51,18 +55,18 @@ namespace IpcClientApp
                 return;
             }
 
-            string message = SendMessageTextBox.Text;
+            IpcData.IpcData ipcData = new IpcData.IpcData(IpcDataId.message, SendMessageTextBox.Text);
 
-            SendMessage(message);
+            SendData(ipcData);
             SendMessageTextBox.ResetText();
         }
 
         /// <summary>
-        /// メッセージを送信する
+        /// データを送信する
         /// </summary>
-        private async void SendMessage(string message)
+        private async void SendData(IpcData.IpcData ipcData)
         {
-            await client.writer.WriteLineAsync(message);
+            await client.writer.WriteLineAsync(JsonSerializer.Serialize(ipcData));
             await client.writer.FlushAsync();
         }
 
@@ -82,12 +86,12 @@ namespace IpcClientApp
                 return;
             }
 
-            DispLog($"サーバに接続します。");
+            DispLog($"接続待機中");
 
-            client = new IpcClient(message =>
+            client = new IpcClient(json =>
             {
                 // メッセージ受信のコールバック定義
-                if (message == null)
+                if (json == null)
                 {
                     // 通信が切断されたとき
                     this.Text = appName;
@@ -96,7 +100,7 @@ namespace IpcClientApp
                 else
                 {
                     // メッセージを受信したとき
-                    DispMessage(ReceiveMessageTextBox, message);
+                    HandleIpcData(JsonSerializer.Deserialize<IpcData.IpcData>(json));
                 }
             });
 
@@ -106,7 +110,12 @@ namespace IpcClientApp
 
             if (isSuccess != false)
             {
-                this.Text = appName + "（通信中）";
+                DispLog($"接続完了");
+
+                // 通信先に自身のIPアドレスを渡す
+                IPAddress ipAddress = GetOwnIpAddress();
+                IpcData.IpcData ipcData = new IpcData.IpcData(IpcDataId.ipAddress, ipAddress.ToString());
+                SendData(ipcData);
             }
 
             await client.Listen();
@@ -120,8 +129,47 @@ namespace IpcClientApp
             bool isSuccess = client.Disconnect();
             if (isSuccess != false)
             {
-                DispLog($"サーバーとの通信を切断しました。");
+                DispLog($"切断");
             }
+        }
+
+        /// <summary>
+        /// 受信データを処理する
+        /// </summary>
+        private void HandleIpcData(IpcData.IpcData ipcData)
+        {
+            switch (ipcData.id)
+            {
+                case IpcData.IpcDataId.ipAddress:
+                    this.Text = appName + "（" + "通信中：" + ipcData.data + "）";
+                    break;
+
+                case IpcData.IpcDataId.message:
+                    DispMessage(ReceiveMessageTextBox, ipcData.data);
+                    break;
+
+                default:
+                    // Donothing
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 自身のIPアドレスを取得する
+        /// </summary>
+        private IPAddress GetOwnIpAddress()
+        {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+
+            foreach (IPAddress ipAddress in host.AddressList)
+            {
+                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ipAddress;
+                }
+            }
+
+            return null;
         }
 
         /// <summary>

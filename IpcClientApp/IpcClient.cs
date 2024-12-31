@@ -12,7 +12,7 @@ namespace IpcClientApp
         public StreamReader reader;
         public StreamWriter writer;
 
-        private readonly int pollingMillisec = 10;
+        private readonly int pollingMillisec = 100;
 
         private readonly Action<string> messageReceiveCallBack;
 
@@ -66,7 +66,7 @@ namespace IpcClientApp
 
                 return true;
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 return false;
             }

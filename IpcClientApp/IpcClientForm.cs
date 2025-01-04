@@ -32,7 +32,7 @@ namespace IpcClientApp
         /// </summary>
         public void DispMessage(TextBox textBox, string message)
         {
-            textBox.Text += (message + "\r\n");
+            textBox.Text += (DateTime.Now.ToString("yyyy/mm/dd/ HH:mm:ss") + "\r\n" + message + "\r\n" + "\n");
         }
 
         /// <summary>
@@ -68,6 +68,11 @@ namespace IpcClientApp
         {
             await client.writer.WriteLineAsync(JsonSerializer.Serialize(ipcData));
             await client.writer.FlushAsync();
+
+            if (ipcData.id == IpcDataId.message)
+            {
+                DispMessage(MessageTextBox, ipcData.data);
+            }
         }
 
         /// <summary>
@@ -126,6 +131,17 @@ namespace IpcClientApp
         /// </summary>
         private void DisconnectButton_Click(object sender, EventArgs e)
         {
+            if (client == null)
+            {
+                return;
+            }
+
+            bool isConnectionDead = (client.writer == null) && (client.reader == null) && (client.pipe == null);
+            if (isConnectionDead)
+            {
+                return;
+            }
+
             bool isSuccess = client.Disconnect();
             if (isSuccess != false)
             {
@@ -145,7 +161,7 @@ namespace IpcClientApp
                     break;
 
                 case IpcData.IpcDataId.message:
-                    DispMessage(ReceiveMessageTextBox, ipcData.data);
+                    DispMessage(MessageTextBox, ipcData.data);
                     break;
 
                 default:

@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace IpcServerApp
 {
@@ -12,6 +13,9 @@ namespace IpcServerApp
         public readonly string appName = "IpcServerApp";
         public IpcServer server;
         public string pipeName;
+
+        public readonly int lineLengthMax = 24;
+        public readonly int lineOffset = 64;
 
         /// <summary>
         /// コンストラクタ
@@ -34,7 +38,7 @@ namespace IpcServerApp
         /// </summary>
         public void DispMessage(TextBox textBox, string message)
         {
-            textBox.Text += (message + "\r\n");
+            textBox.Text += (DateTime.Now.ToString("yyyy/mm/dd/ HH:mm:ss") + "\r\n" + message + "\r\n" + "\n");
         }
 
         /// <summary>
@@ -92,6 +96,17 @@ namespace IpcServerApp
         /// </summary>
         private void DisconnectButton_Click(object sender, EventArgs e)
         {
+            if (server == null)
+            {
+                return;
+            }
+
+            bool isConnectionDead = (server.writer == null) && (server.reader == null) && (server.pipe == null);
+            if (isConnectionDead)
+            {
+                return;
+            }
+
             bool isSuccess = server.Disconnect();
             if (isSuccess != false)
             {
@@ -132,6 +147,11 @@ namespace IpcServerApp
         {
             await server.writer.WriteLineAsync(JsonSerializer.Serialize(ipcData));
             await server.writer.FlushAsync();
+
+            if (ipcData.id == IpcDataId.message)
+            {
+                DispMessage(MessageTextBox, ipcData.data);
+            }
         }
 
         /// <summary>
@@ -146,7 +166,7 @@ namespace IpcServerApp
                     break;
 
                 case IpcData.IpcDataId.message:
-                    DispMessage(ReceiveMessageTextBox, ipcData.data);
+                    DispMessage(MessageTextBox, ipcData.data);
                     break;
 
                 default:

@@ -52,16 +52,19 @@ namespace IpcClientApp
                 if (writer != null)
                 {
                     writer.Dispose();
+                    writer = null;
                 }
 
                 if (reader != null)
                 {
                     reader.Dispose();
+                    reader = null;
                 }
 
                 if (pipe != null)
                 {
                     pipe.Dispose();
+                    pipe = null;
                 }
 
                 return true;

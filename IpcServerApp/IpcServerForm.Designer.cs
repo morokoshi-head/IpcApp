@@ -34,11 +34,10 @@
             this.SendMessageTextBox = new System.Windows.Forms.TextBox();
             this.DisconnectButton = new System.Windows.Forms.Button();
             this.ConnectButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ReceiveMessageTextBox = new System.Windows.Forms.TextBox();
             this.SendButton = new System.Windows.Forms.Button();
             this.CommunicationSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.MessageTextBox = new System.Windows.Forms.TextBox();
             this.CommunicationSettingsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +65,7 @@
             // 
             this.LogTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.LogTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LogTextBox.Location = new System.Drawing.Point(9, 317);
+            this.LogTextBox.Location = new System.Drawing.Point(11, 543);
             this.LogTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.LogTextBox.Multiline = true;
             this.LogTextBox.Name = "LogTextBox";
@@ -77,12 +76,12 @@
             // SendMessageTextBox
             // 
             this.SendMessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SendMessageTextBox.Location = new System.Drawing.Point(298, 115);
+            this.SendMessageTextBox.Location = new System.Drawing.Point(9, 463);
             this.SendMessageTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.SendMessageTextBox.Multiline = true;
             this.SendMessageTextBox.Name = "SendMessageTextBox";
             this.SendMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.SendMessageTextBox.Size = new System.Drawing.Size(286, 154);
+            this.SendMessageTextBox.Size = new System.Drawing.Size(577, 36);
             this.SendMessageTextBox.TabIndex = 4;
             // 
             // DisconnectButton
@@ -107,30 +106,9 @@
             this.ConnectButton.UseVisualStyleBackColor = true;
             this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 101);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 12);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "受信メッセージ";
-            // 
-            // ReceiveMessageTextBox
-            // 
-            this.ReceiveMessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ReceiveMessageTextBox.Location = new System.Drawing.Point(9, 115);
-            this.ReceiveMessageTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ReceiveMessageTextBox.Multiline = true;
-            this.ReceiveMessageTextBox.Name = "ReceiveMessageTextBox";
-            this.ReceiveMessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ReceiveMessageTextBox.Size = new System.Drawing.Size(286, 154);
-            this.ReceiveMessageTextBox.TabIndex = 8;
-            // 
             // SendButton
             // 
-            this.SendButton.Location = new System.Drawing.Point(484, 274);
+            this.SendButton.Location = new System.Drawing.Point(496, 503);
             this.SendButton.Margin = new System.Windows.Forms.Padding(2);
             this.SendButton.Name = "SendButton";
             this.SendButton.Size = new System.Drawing.Size(90, 24);
@@ -157,23 +135,33 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(296, 101);
+            this.label2.Location = new System.Drawing.Point(7, 449);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 12);
             this.label2.TabIndex = 19;
             this.label2.Text = "送信メッセージ";
             // 
+            // MessageTextBox
+            // 
+            this.MessageTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MessageTextBox.Location = new System.Drawing.Point(9, 89);
+            this.MessageTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.MessageTextBox.Multiline = true;
+            this.MessageTextBox.Name = "MessageTextBox";
+            this.MessageTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.MessageTextBox.Size = new System.Drawing.Size(577, 347);
+            this.MessageTextBox.TabIndex = 20;
+            // 
             // IpcServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 433);
+            this.ClientSize = new System.Drawing.Size(594, 661);
+            this.Controls.Add(this.MessageTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CommunicationSettingsGroupBox);
             this.Controls.Add(this.SendButton);
-            this.Controls.Add(this.ReceiveMessageTextBox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.SendMessageTextBox);
             this.Controls.Add(this.LogTextBox);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -194,11 +182,10 @@
         public System.Windows.Forms.TextBox SendMessageTextBox;
         private System.Windows.Forms.Button DisconnectButton;
         private System.Windows.Forms.Button ConnectButton;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.TextBox ReceiveMessageTextBox;
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.GroupBox CommunicationSettingsGroupBox;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TextBox MessageTextBox;
     }
 }
 
